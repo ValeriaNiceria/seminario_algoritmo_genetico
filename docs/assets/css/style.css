@@ -1,0 +1,117 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+ul.summary > li:first-child > a {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.header-section-number {
+    display: none;
+}
+
+.book .book-body .page-wrapper .page-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px 0 20px;
+}
+
+div#header > h1 {
+    margin-top: -5px;
+    font-size: 27px;
+    color: #2B3E51;
+}
+
+#header > h1:hover {
+    color: #57B952;
+}
+
+.book-header.fixed > h1 {
+    display: none;
+}
+
+div#header > h3 {
+    margin-top: -30px;
+}
+
+.book .book-summary ul.summary li a:hover, .book .book-summary ul.summary li.active>a {
+    color: #57B952;
+    background: 0 0;
+    text-decoration: none;
+    font-weight: 550;
+}
+
+b {
+  display: none;
+}
+
+
+th {
+    font-size: 11px;
+}
+
+li.chapter > a:before {
+    content: "▪";
+}
+
+.summary > li:first-child {
+    font-weight: bold;
+}
+
+.summary > li:last-child {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    margin: 0px 50px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+#header > .date {
+    margin-top: -10px;
+}
+
+.book .book-body .page-wrapper .page-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px 0 20px;
+}
+
+#header > .author,
+#header > .date {
+    font-size: 15px;
+}
+
+
+/* Títulos */
+
+
+
+.book .book-body .page-wrapper .page-inner section.normal h1 {
+    font-size: 24px;
+}
+
+
+.book .book-body .page-wrapper .page-inner section.normal h2 {
+    font-size: 19px;
+}
+
+
+.book .book-body .page-wrapper .page-inner section.normal blockquote, .book .book-body .page-wrapper .page-inner section.normal dl, .book .book-body .page-wrapper .page-inner section.normal ol, .book .book-body .page-wrapper .page-inner section.normal p, .book .book-body .page-wrapper .page-inner section.normal table, .book .book-body .page-wrapper .page-inner section.normal ul {
+    margin-top: 0;
+    margin-bottom: .85em;
+    font-size: 15px;
+}
