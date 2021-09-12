@@ -36,7 +36,7 @@ Cinco fases são consideradas em um algoritmo genético:
 - Cruzamento
 - Mutação
 
-Veremos cada uma dessas fases sendo implementadas utilizando a linguagem R e para exemplificar como funcionam os algoritmos genéticos, irei utilizar o exemplo clássico da mochila, onde devemos encher a mochila com diversos itens sem ultrapassar um determinado limite de peso, otimizando o valor de cada item carregado.
+Veremos cada uma dessas fases sendo implementadas utilizando à linguagem R e para exemplificar como funcionam os algoritmos genéticos, irei utilizar o exemplo clássico da mochila, onde devemos encher a mochila com diversos itens sem ultrapassar um determinado limite de peso, otimizando o valor de cada item carregado.
 
 *Esses são os dados:*
 
@@ -507,13 +507,16 @@ plot(
 
 # Pacote GA
 
-A linguagem R já tem diversos pacotes para se trabalhar com o algoritmo genético, não sendo necessário programar todas as fases de um algoritmo genético, quando for trabalhar com esses pacotes será necessário criar somente a função de avaliação de acordo com o problema que estiver resolvendo.
+A linguagem R tem diversos pacotes para se trabalhar com o algoritmo genético, não sendo necessário programar todas as fases de um algoritmo genético, quando for trabalhar com esses pacotes será necessário criar somente a função de avaliação de acordo com o problema que estiver resolvendo.
 
 ```{r, echo=TRUE}
 
 # install.packages(GA) # Instalando o pacote GA
 
+# Carregando o pacote GA
 library(GA)
+
+# Listas com os dados 
 
 itens <- c(
   "Capa de chuva",
@@ -534,7 +537,7 @@ limite <- 25 # Limite da mochila
 ```
 
 ```{r, echo=TRUE}
-
+# Função de avaliação
 avaliacao <- function(cromossomo) { 
   nota <- 0
   soma_pesos <- 0

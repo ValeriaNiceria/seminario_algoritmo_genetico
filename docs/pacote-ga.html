@@ -168,10 +168,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="pacote-ga" class="section level1" number="2">
 <h1><span class="header-section-number"> 2</span> Pacote GA</h1>
-<p>A linguagem R já tem diversos pacotes para se trabalhar com o algoritmo genético, não sendo necessário programar todas as fases de um algoritmo genético, quando for trabalhar com esses pacotes será necessário criar somente a função de avaliação de acordo com o problema que estiver resolvendo.</p>
+<p>A linguagem R tem diversos pacotes para se trabalhar com o algoritmo genético, não sendo necessário programar todas as fases de um algoritmo genético, quando for trabalhar com esses pacotes será necessário criar somente a função de avaliação de acordo com o problema que estiver resolvendo.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="pacote-ga.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(GA) # Instalando o pacote GA</span></span>
 <span id="cb17-2"><a href="pacote-ga.html#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="pacote-ga.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GA)</span></code></pre></div>
+<span id="cb17-3"><a href="pacote-ga.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregando o pacote GA</span></span>
+<span id="cb17-4"><a href="pacote-ga.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GA)</span></code></pre></div>
 <pre><code>## Carregando pacotes exigidos: foreach</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;foreach&#39;</code></pre>
@@ -186,37 +187,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## The following object is masked from &#39;package:utils&#39;:
 ## 
 ##     de</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="pacote-ga.html#cb25-1" aria-hidden="true" tabindex="-1"></a>itens <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb25-2"><a href="pacote-ga.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Capa de chuva&quot;</span>,</span>
-<span id="cb25-3"><a href="pacote-ga.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Canivete&quot;</span>,</span>
-<span id="cb25-4"><a href="pacote-ga.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Água mineral&quot;</span>,</span>
-<span id="cb25-5"><a href="pacote-ga.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Luvas&quot;</span>,</span>
-<span id="cb25-6"><a href="pacote-ga.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Saco de dormir&quot;</span>,</span>
-<span id="cb25-7"><a href="pacote-ga.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Tenda&quot;</span>,</span>
-<span id="cb25-8"><a href="pacote-ga.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Fogão portátil&quot;</span>,</span>
-<span id="cb25-9"><a href="pacote-ga.html#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Comida enlatada&quot;</span>,</span>
-<span id="cb25-10"><a href="pacote-ga.html#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Laches&quot;</span></span>
-<span id="cb25-11"><a href="pacote-ga.html#cb25-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-12"><a href="pacote-ga.html#cb25-12" aria-hidden="true" tabindex="-1"></a>pesos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">3</span>)</span>
-<span id="cb25-13"><a href="pacote-ga.html#cb25-13" aria-hidden="true" tabindex="-1"></a>pontos_sobrevivencia <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">18</span>, <span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">8</span>)</span>
-<span id="cb25-14"><a href="pacote-ga.html#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="pacote-ga.html#cb25-15" aria-hidden="true" tabindex="-1"></a>limite <span class="ot">&lt;-</span> <span class="dv">25</span> <span class="co"># Limite da mochila</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="pacote-ga.html#cb26-1" aria-hidden="true" tabindex="-1"></a>avaliacao <span class="ot">&lt;-</span> <span class="cf">function</span>(cromossomo) { </span>
-<span id="cb26-2"><a href="pacote-ga.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  nota <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb26-3"><a href="pacote-ga.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  soma_pesos <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb26-4"><a href="pacote-ga.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cromossomo)) {</span>
-<span id="cb26-5"><a href="pacote-ga.html#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (cromossomo[i] <span class="sc">==</span> <span class="st">&#39;1&#39;</span>) {</span>
-<span id="cb26-6"><a href="pacote-ga.html#cb26-6" aria-hidden="true" tabindex="-1"></a>      nota <span class="ot">&lt;-</span> nota <span class="sc">+</span> pontos_sobrevivencia[i]</span>
-<span id="cb26-7"><a href="pacote-ga.html#cb26-7" aria-hidden="true" tabindex="-1"></a>      soma_pesos <span class="ot">&lt;-</span> soma_pesos <span class="sc">+</span> pesos[i]</span>
-<span id="cb26-8"><a href="pacote-ga.html#cb26-8" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb26-9"><a href="pacote-ga.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb26-10"><a href="pacote-ga.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-11"><a href="pacote-ga.html#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (soma_pesos <span class="sc">&gt;</span> limite) {</span>
-<span id="cb26-12"><a href="pacote-ga.html#cb26-12" aria-hidden="true" tabindex="-1"></a>    nota <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb26-13"><a href="pacote-ga.html#cb26-13" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb26-14"><a href="pacote-ga.html#cb26-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-15"><a href="pacote-ga.html#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nota)</span>
-<span id="cb26-16"><a href="pacote-ga.html#cb26-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="pacote-ga.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Listas com os dados </span></span>
+<span id="cb25-2"><a href="pacote-ga.html#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="pacote-ga.html#cb25-3" aria-hidden="true" tabindex="-1"></a>itens <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb25-4"><a href="pacote-ga.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Capa de chuva&quot;</span>,</span>
+<span id="cb25-5"><a href="pacote-ga.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Canivete&quot;</span>,</span>
+<span id="cb25-6"><a href="pacote-ga.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Água mineral&quot;</span>,</span>
+<span id="cb25-7"><a href="pacote-ga.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Luvas&quot;</span>,</span>
+<span id="cb25-8"><a href="pacote-ga.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Saco de dormir&quot;</span>,</span>
+<span id="cb25-9"><a href="pacote-ga.html#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Tenda&quot;</span>,</span>
+<span id="cb25-10"><a href="pacote-ga.html#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Fogão portátil&quot;</span>,</span>
+<span id="cb25-11"><a href="pacote-ga.html#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Comida enlatada&quot;</span>,</span>
+<span id="cb25-12"><a href="pacote-ga.html#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Laches&quot;</span></span>
+<span id="cb25-13"><a href="pacote-ga.html#cb25-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-14"><a href="pacote-ga.html#cb25-14" aria-hidden="true" tabindex="-1"></a>pesos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">3</span>)</span>
+<span id="cb25-15"><a href="pacote-ga.html#cb25-15" aria-hidden="true" tabindex="-1"></a>pontos_sobrevivencia <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">18</span>, <span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">8</span>)</span>
+<span id="cb25-16"><a href="pacote-ga.html#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="pacote-ga.html#cb25-17" aria-hidden="true" tabindex="-1"></a>limite <span class="ot">&lt;-</span> <span class="dv">25</span> <span class="co"># Limite da mochila</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="pacote-ga.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função de avaliação</span></span>
+<span id="cb26-2"><a href="pacote-ga.html#cb26-2" aria-hidden="true" tabindex="-1"></a>avaliacao <span class="ot">&lt;-</span> <span class="cf">function</span>(cromossomo) { </span>
+<span id="cb26-3"><a href="pacote-ga.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  nota <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb26-4"><a href="pacote-ga.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  soma_pesos <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb26-5"><a href="pacote-ga.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cromossomo)) {</span>
+<span id="cb26-6"><a href="pacote-ga.html#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (cromossomo[i] <span class="sc">==</span> <span class="st">&#39;1&#39;</span>) {</span>
+<span id="cb26-7"><a href="pacote-ga.html#cb26-7" aria-hidden="true" tabindex="-1"></a>      nota <span class="ot">&lt;-</span> nota <span class="sc">+</span> pontos_sobrevivencia[i]</span>
+<span id="cb26-8"><a href="pacote-ga.html#cb26-8" aria-hidden="true" tabindex="-1"></a>      soma_pesos <span class="ot">&lt;-</span> soma_pesos <span class="sc">+</span> pesos[i]</span>
+<span id="cb26-9"><a href="pacote-ga.html#cb26-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb26-10"><a href="pacote-ga.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-11"><a href="pacote-ga.html#cb26-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-12"><a href="pacote-ga.html#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (soma_pesos <span class="sc">&gt;</span> limite) {</span>
+<span id="cb26-13"><a href="pacote-ga.html#cb26-13" aria-hidden="true" tabindex="-1"></a>    nota <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb26-14"><a href="pacote-ga.html#cb26-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-15"><a href="pacote-ga.html#cb26-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-16"><a href="pacote-ga.html#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nota)</span>
+<span id="cb26-17"><a href="pacote-ga.html#cb26-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="pacote-ga.html#cb27-1" aria-hidden="true" tabindex="-1"></a>algoritmo <span class="ot">&lt;-</span> <span class="fu">ga</span>(</span>
 <span id="cb27-2"><a href="pacote-ga.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;binary&quot;</span>,</span>
 <span id="cb27-3"><a href="pacote-ga.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fitness =</span> avaliacao,</span>
