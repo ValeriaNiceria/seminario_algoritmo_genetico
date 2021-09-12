@@ -36,7 +36,7 @@ Cinco fases são consideradas em um algoritmo genético:
 - Cruzamento
 - Mutação
 
-Veremos cada uma dessas fases abaixo, sendo implementadas utilizando a linguagem R e para exemplificar como funcionam os algoritmos genéticos, irei utilizar o exemplo clássico da mochila, onde devemos encher a mochila com diversos itens sem ultrapassar um determinado limite de peso, otimizando o valor de cada item carregado, onde no final teremos selecionado os melhores itens possíveis dado o limite da nossa mochila.
+Veremos cada uma dessas fases sendo implementadas utilizando a linguagem R e para exemplificar como funcionam os algoritmos genéticos, irei utilizar o exemplo clássico da mochila, onde devemos encher a mochila com diversos itens sem ultrapassar um determinado limite de peso, otimizando o valor de cada item carregado.
 
 *Esses são os dados:*
 
@@ -64,7 +64,7 @@ colnames(dados) <- c('Itens', 'Pesos (Kg)', 'Pontos de sobrevivência')
 kable(dados)
 ```
 
-Em algoritmos genéticos trabalhamos com aleatoriedade, sendo assim, para que o resultado na sua máquina seja o mesmo que veremos abaixo devemos definir uma semente.
+Em algoritmos genéticos trabalhamos com aleatoriedade, sendo assim, para que os resultados sejam sempre os mesmos devemos definir uma semente.
 
 ```{r, echo=TRUE}
 # Definindo uma semente 
