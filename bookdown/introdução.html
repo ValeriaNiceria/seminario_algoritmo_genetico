@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Algoritmo Genético</title>
+  <meta name="description" content="Algoritmo Genético" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Algoritmo Genético" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Algoritmo Genético" />
+  
+  
+  
+
+<meta name="author" content=" Valéria Nicéria" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="pacote-ga.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Algoritmo Genético</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introdução.html"><a href="introdução.html#população-inicial"><i class="fa fa-check"></i><b>1.1</b> População Inicial</a></li>
+<li class="chapter" data-level="1.2" data-path="introdução.html"><a href="introdução.html#função-de-avaliação"><i class="fa fa-check"></i><b>1.2</b> Função de avaliação</a></li>
+<li class="chapter" data-level="1.3" data-path="introdução.html"><a href="introdução.html#seleção"><i class="fa fa-check"></i><b>1.3</b> Seleção</a></li>
+<li class="chapter" data-level="1.4" data-path="introdução.html"><a href="introdução.html#cruzamento"><i class="fa fa-check"></i><b>1.4</b> Cruzamento</a></li>
+<li class="chapter" data-level="1.5" data-path="introdução.html"><a href="introdução.html#mutação"><i class="fa fa-check"></i><b>1.5</b> Mutação</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="pacote-ga.html"><a href="pacote-ga.html"><i class="fa fa-check"></i><b>2</b> Pacote GA</a></li>
+<li class="chapter" data-level="3" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>3</b> Referências</a></li>
+<li class="divider"></li>
+<li><a href="https://www.operdata.com.br/ target="blank"> Oper: Acesse nosso site</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Algoritmo Genético</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Algoritmo Genético</h1>
+<p class="author"><em><i class='fa fa-user-edit'></i> Valéria Nicéria</em></p>
+<p class="date"><em><i class='fa fa-calendar'></i> 06 de setembro de 2021</em></p>
+</div>
+<div id="introdução" class="section level1" number="1">
+<h1><span class="header-section-number"> 1</span> Introdução</h1>
+<p><img src="data:image/png;base64,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" alt="logo" style="position:absolute; top:0; right:0px;  padding:10px;"/></p>
+<p>Um algoritmo genético está entre as heurísticas mais famosas, onde são realizados procedimentos de busca no espaço das soluções viáveis, utilizando regras probabilísticas para combinar soluções a fim de obter melhorias de qualidade. É um algoritmo inspirado na teoria da evolução natural de Charles Darwin. Este algoritmo reflete o processo de seleção natural onde os indivíduos mais aptos são selecionados para reprodução a fim de produzir descendentes na próxima geração.</p>
+<p>Cinco fases são consideradas em um algoritmo genético:</p>
+<ul>
+<li>População inicial</li>
+<li>Função de avaliação</li>
+<li>Seleção</li>
+<li>Cruzamento</li>
+<li>Mutação</li>
+</ul>
+<p>Veremos cada uma dessas fases abaixo, sendo implementadas utilizando a linguagem R e para exemplificar como funcionam os algoritmos genéticos, irei utilizar o exemplo clássico da mochila, onde devemos encher a mochila com diversos itens sem ultrapassar um determinado limite de peso, otimizando o valor de cada item carregado, onde no final teremos selecionado os melhores itens possíveis dado o limite da nossa mochila.</p>
+<p><em>Esses são os dados:</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Itens
+</th>
+<th style="text-align:right;">
+Pesos (Kg)
+</th>
+<th style="text-align:right;">
+Pontos de sobrevivência
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Capa de chuva
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Canivete
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Água mineral
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Luvas
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Saco de dormir
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tenda
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fogão portátil
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comida enlatada
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Laches
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+<p>Em algoritmos genéticos trabalhamos com aleatoriedade, sendo assim, para que o resultado na sua máquina seja o mesmo que veremos abaixo devemos definir uma semente.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introdução.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definindo uma semente </span></span>
+<span id="cb1-2"><a href="introdução.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">17</span>)</span></code></pre></div>
+<p><em>Definindo os objetos.</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introdução.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando as classes</span></span>
+<span id="cb2-2"><a href="introdução.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(</span>
+<span id="cb2-3"><a href="introdução.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Solucao&quot;</span>, <span class="co"># Possíveis soluções para o problema</span></span>
+<span id="cb2-4"><a href="introdução.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb2-5"><a href="introdução.html#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pesos =</span> <span class="st">&quot;numeric&quot;</span>,</span>
+<span id="cb2-6"><a href="introdução.html#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">pontos_sobrevivencia =</span> <span class="st">&quot;numeric&quot;</span>,</span>
+<span id="cb2-7"><a href="introdução.html#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">limite_peso =</span> <span class="st">&quot;numeric&quot;</span>,</span>
+<span id="cb2-8"><a href="introdução.html#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">nota_avaliacao =</span> <span class="st">&quot;numeric&quot;</span>,</span>
+<span id="cb2-9"><a href="introdução.html#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">peso_total =</span> <span class="st">&quot;numeric&quot;</span>,</span>
+<span id="cb2-10"><a href="introdução.html#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">geracao =</span> <span class="st">&quot;numeric&quot;</span>,</span>
+<span id="cb2-11"><a href="introdução.html#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">cromossomo =</span> <span class="st">&quot;character&quot;</span></span>
+<span id="cb2-12"><a href="introdução.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-13"><a href="introdução.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">prototype =</span> <span class="fu">list</span>(</span>
+<span id="cb2-14"><a href="introdução.html#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">pesos =</span> <span class="dv">0</span>,</span>
+<span id="cb2-15"><a href="introdução.html#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">pontos_sobrevivencia =</span> <span class="dv">0</span>,</span>
+<span id="cb2-16"><a href="introdução.html#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">limite_peso =</span> <span class="dv">0</span>,</span>
+<span id="cb2-17"><a href="introdução.html#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">nota_avaliacao =</span> <span class="dv">0</span>,</span>
+<span id="cb2-18"><a href="introdução.html#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">geracao =</span> <span class="dv">0</span></span>
+<span id="cb2-19"><a href="introdução.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-20"><a href="introdução.html#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-21"><a href="introdução.html#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="introdução.html#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">setClass</span>(</span>
+<span id="cb2-23"><a href="introdução.html#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;algoritmoGenetico&quot;</span>,</span>
+<span id="cb2-24"><a href="introdução.html#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>( <span class="co"># Atributos da classe</span></span>
+<span id="cb2-25"><a href="introdução.html#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">tamanho_populacao =</span> <span class="st">&quot;numeric&quot;</span>,</span>
+<span id="cb2-26"><a href="introdução.html#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">populacao =</span> <span class="st">&quot;list&quot;</span>,</span>
+<span id="cb2-27"><a href="introdução.html#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">geracao =</span> <span class="st">&quot;numeric&quot;</span>,</span>
+<span id="cb2-28"><a href="introdução.html#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">melhor_solucao =</span> <span class="st">&quot;Solucao&quot;</span>,</span>
+<span id="cb2-29"><a href="introdução.html#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">lista_solucoes =</span> <span class="st">&quot;list&quot;</span></span>
+<span id="cb2-30"><a href="introdução.html#cb2-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-31"><a href="introdução.html#cb2-31" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="população-inicial" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> População Inicial</h2>
+<p><img src="assets/img/populacao.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p>O processo começa com um conjunto de indivíduos denominado População. Cada indivíduo é uma possível solução para o problema que desejamos resolver.
+Um indivíduo é caracterizado por um conjunto de parâmetros conhecido como Genes. Os genes são unidos em uma string para formar um cromossomo (solução).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introdução.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando as funções para iniciar a população</span></span>
+<span id="cb3-2"><a href="introdução.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="introdução.html#cb3-3" aria-hidden="true" tabindex="-1"></a>gerar_cromossomo <span class="ot">&lt;-</span> <span class="cf">function</span>(tamanho_cromossomo) {</span>
+<span id="cb3-4"><a href="introdução.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  cromossomo <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb3-5"><a href="introdução.html#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>), </span>
+<span id="cb3-6"><a href="introdução.html#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> tamanho_cromossomo, </span>
+<span id="cb3-7"><a href="introdução.html#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace =</span> T</span>
+<span id="cb3-8"><a href="introdução.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb3-9"><a href="introdução.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-10"><a href="introdução.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cromossomo)</span>
+<span id="cb3-11"><a href="introdução.html#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-12"><a href="introdução.html#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="introdução.html#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="introdução.html#cb3-14" aria-hidden="true" tabindex="-1"></a>inicializa_populacao <span class="ot">&lt;-</span> <span class="cf">function</span>(algoritmo_genetico, pesos, pontos_sobrevivencia, limite) {</span>
+<span id="cb3-15"><a href="introdução.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>algoritmo_genetico<span class="sc">@</span>tamanho_populacao) {</span>
+<span id="cb3-16"><a href="introdução.html#cb3-16" aria-hidden="true" tabindex="-1"></a>    algoritmo_genetico<span class="sc">@</span>populacao[[i]] <span class="ot">&lt;-</span> </span>
+<span id="cb3-17"><a href="introdução.html#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">new</span>(</span>
+<span id="cb3-18"><a href="introdução.html#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Solucao&quot;</span>, </span>
+<span id="cb3-19"><a href="introdução.html#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">pesos =</span> pesos,</span>
+<span id="cb3-20"><a href="introdução.html#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">pontos_sobrevivencia =</span> pontos_sobrevivencia,</span>
+<span id="cb3-21"><a href="introdução.html#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">limite_peso =</span> limite</span>
+<span id="cb3-22"><a href="introdução.html#cb3-22" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb3-23"><a href="introdução.html#cb3-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-24"><a href="introdução.html#cb3-24" aria-hidden="true" tabindex="-1"></a>    algoritmo_genetico<span class="sc">@</span>populacao[[i]]<span class="sc">@</span>cromossomo <span class="ot">&lt;-</span> <span class="fu">gerar_cromossomo</span>(<span class="fu">length</span>(pesos))</span>
+<span id="cb3-25"><a href="introdução.html#cb3-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-26"><a href="introdução.html#cb3-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-27"><a href="introdução.html#cb3-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-28"><a href="introdução.html#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(algoritmo_genetico)</span>
+<span id="cb3-29"><a href="introdução.html#cb3-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="função-de-avaliação" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Função de avaliação</h2>
+<p>A função de avaliação ou também conhecida como função fitness, determina o quão apto um indivíduo está. Ela dá uma pontuação de aptidão para cada indivíduo. A probabilidade de um indivíduo ser selecionado para reprodução é baseada em sua pontuação de aptidão.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introdução.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Como critério de avaliação será utilizado o ponto de sobrevivência</span></span>
+<span id="cb4-2"><a href="introdução.html#cb4-2" aria-hidden="true" tabindex="-1"></a>avaliacao <span class="ot">&lt;-</span> <span class="cf">function</span>(solucao) {</span>
+<span id="cb4-3"><a href="introdução.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  nota <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-4"><a href="introdução.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  soma_pesos <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="introdução.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(solucao<span class="sc">@</span>cromossomo)) {</span>
+<span id="cb4-6"><a href="introdução.html#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (solucao<span class="sc">@</span>cromossomo[i] <span class="sc">==</span> <span class="st">&#39;1&#39;</span>) {</span>
+<span id="cb4-7"><a href="introdução.html#cb4-7" aria-hidden="true" tabindex="-1"></a>      nota <span class="ot">&lt;-</span> nota <span class="sc">+</span> solucao<span class="sc">@</span>pontos_sobrevivencia[i]</span>
+<span id="cb4-8"><a href="introdução.html#cb4-8" aria-hidden="true" tabindex="-1"></a>      soma_pesos <span class="ot">&lt;-</span> soma_pesos <span class="sc">+</span> solucao<span class="sc">@</span>pesos[i]</span>
+<span id="cb4-9"><a href="introdução.html#cb4-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-10"><a href="introdução.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-11"><a href="introdução.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-12"><a href="introdução.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (soma_pesos <span class="sc">&gt;</span> solucao<span class="sc">@</span>limite_peso) {</span>
+<span id="cb4-13"><a href="introdução.html#cb4-13" aria-hidden="true" tabindex="-1"></a>    nota <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb4-14"><a href="introdução.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-15"><a href="introdução.html#cb4-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-16"><a href="introdução.html#cb4-16" aria-hidden="true" tabindex="-1"></a>  solucao<span class="sc">@</span>nota_avaliacao <span class="ot">&lt;-</span> nota</span>
+<span id="cb4-17"><a href="introdução.html#cb4-17" aria-hidden="true" tabindex="-1"></a>  solucao<span class="sc">@</span>peso_total <span class="ot">&lt;-</span> soma_pesos</span>
+<span id="cb4-18"><a href="introdução.html#cb4-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-19"><a href="introdução.html#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(solucao)</span>
+<span id="cb4-20"><a href="introdução.html#cb4-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="seleção" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Seleção</h2>
+<p>A ideia da fase de seleção é selecionar os indivíduos mais aptos e deixá-los passar seus genes para a próxima geração.
+Dois pares de indivíduos ( pais ) são selecionados com base em suas pontuações de aptidão. Indivíduos com alta aptidão têm mais chance de serem selecionados para reprodução.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introdução.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Será utilizando o método da roleta viciada para selecionar os pais</span></span>
+<span id="cb5-2"><a href="introdução.html#cb5-2" aria-hidden="true" tabindex="-1"></a>soma_avaliacoes <span class="ot">&lt;-</span> <span class="cf">function</span>(algoritmo_genetico) {</span>
+<span id="cb5-3"><a href="introdução.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  soma <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb5-4"><a href="introdução.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (solucao <span class="cf">in</span> algoritmo_genetico<span class="sc">@</span>populacao) {</span>
+<span id="cb5-5"><a href="introdução.html#cb5-5" aria-hidden="true" tabindex="-1"></a>    soma <span class="ot">=</span> soma <span class="sc">+</span> solucao<span class="sc">@</span>nota_avaliacao</span>
+<span id="cb5-6"><a href="introdução.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-7"><a href="introdução.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-8"><a href="introdução.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(soma)</span>
+<span id="cb5-9"><a href="introdução.html#cb5-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-10"><a href="introdução.html#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="introdução.html#cb5-11" aria-hidden="true" tabindex="-1"></a>selecao_roleta <span class="ot">&lt;-</span> <span class="cf">function</span>(algoritmo_genetico, soma_avaliacoes) { <span class="co"># Método da roleta viciada</span></span>
+<span id="cb5-12"><a href="introdução.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  pai <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb5-13"><a href="introdução.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  valor_sorteado <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">*</span> soma_avaliacoes</span>
+<span id="cb5-14"><a href="introdução.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  soma <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb5-15"><a href="introdução.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-16"><a href="introdução.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (i <span class="sc">&lt;</span> <span class="fu">length</span>(algoritmo_genetico<span class="sc">@</span>populacao) <span class="sc">&amp;</span> soma <span class="sc">&lt;</span> valor_sorteado) {</span>
+<span id="cb5-17"><a href="introdução.html#cb5-17" aria-hidden="true" tabindex="-1"></a>    soma <span class="ot">&lt;-</span> soma <span class="sc">+</span> algoritmo_genetico<span class="sc">@</span>populacao[[i]]<span class="sc">@</span>nota_avaliacao</span>
+<span id="cb5-18"><a href="introdução.html#cb5-18" aria-hidden="true" tabindex="-1"></a>    pai <span class="ot">&lt;-</span> pai <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb5-19"><a href="introdução.html#cb5-19" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb5-20"><a href="introdução.html#cb5-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-21"><a href="introdução.html#cb5-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-22"><a href="introdução.html#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pai)</span>
+<span id="cb5-23"><a href="introdução.html#cb5-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="cruzamento" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Cruzamento</h2>
+<p><img src="assets/img/crossover.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>O Cruzamento ou crossover é a fase mais significativa em um algoritmo genético. Para cada par de pais a serem acasalados, um ponto de cruzamento é escolhido aleatoriamente de dentro dos genes. Onde os filhos são criados pela troca dos genes dos pais até que o ponto de cruzamento ser alcançado. E esses novos descendentes são adicionados à população.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="introdução.html#cb6-1" aria-hidden="true" tabindex="-1"></a>crossover <span class="ot">&lt;-</span> <span class="cf">function</span>(solucao_a, solucao_b) {</span>
+<span id="cb6-2"><a href="introdução.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  indices <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(solucao_a<span class="sc">@</span>cromossomo)</span>
+<span id="cb6-3"><a href="introdução.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  corte <span class="ot">&lt;-</span> <span class="fu">sample</span>(indices, <span class="dv">1</span>)</span>
+<span id="cb6-4"><a href="introdução.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-5"><a href="introdução.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cat(&quot;\nPonto de corte:&quot;, corte)</span></span>
+<span id="cb6-6"><a href="introdução.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-7"><a href="introdução.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (corte <span class="sc">==</span> <span class="fu">length</span>(solucao_a<span class="sc">@</span>cromossomo)) {</span>
+<span id="cb6-8"><a href="introdução.html#cb6-8" aria-hidden="true" tabindex="-1"></a>    filho1 <span class="ot">&lt;-</span> solucao_b<span class="sc">@</span>cromossomo[<span class="dv">1</span><span class="sc">:</span>corte]</span>
+<span id="cb6-9"><a href="introdução.html#cb6-9" aria-hidden="true" tabindex="-1"></a>    filho2 <span class="ot">&lt;-</span> solucao_a<span class="sc">@</span>cromossomo[<span class="dv">1</span><span class="sc">:</span>corte]</span>
+<span id="cb6-10"><a href="introdução.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb6-11"><a href="introdução.html#cb6-11" aria-hidden="true" tabindex="-1"></a>    filho1 <span class="ot">&lt;-</span> <span class="fu">c</span>(solucao_b<span class="sc">@</span>cromossomo[<span class="dv">1</span><span class="sc">:</span>corte], solucao_a<span class="sc">@</span>cromossomo[(corte<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(solucao_a<span class="sc">@</span>cromossomo)])</span>
+<span id="cb6-12"><a href="introdução.html#cb6-12" aria-hidden="true" tabindex="-1"></a>    filho2 <span class="ot">&lt;-</span> <span class="fu">c</span>(solucao_a<span class="sc">@</span>cromossomo[<span class="dv">1</span><span class="sc">:</span>corte], solucao_b<span class="sc">@</span>cromossomo[(corte<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(solucao_b<span class="sc">@</span>cromossomo)])</span>
+<span id="cb6-13"><a href="introdução.html#cb6-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-14"><a href="introdução.html#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-15"><a href="introdução.html#cb6-15" aria-hidden="true" tabindex="-1"></a>  filhos <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="co"># Construtor</span></span>
+<span id="cb6-16"><a href="introdução.html#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">new</span>(</span>
+<span id="cb6-17"><a href="introdução.html#cb6-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Solucao&quot;</span>, </span>
+<span id="cb6-18"><a href="introdução.html#cb6-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">pesos =</span> solucao_a<span class="sc">@</span>pesos,</span>
+<span id="cb6-19"><a href="introdução.html#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">pontos_sobrevivencia =</span> solucao_a<span class="sc">@</span>pontos_sobrevivencia,</span>
+<span id="cb6-20"><a href="introdução.html#cb6-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">limite_peso =</span> solucao_a<span class="sc">@</span>limite_peso,</span>
+<span id="cb6-21"><a href="introdução.html#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">geracao =</span> solucao_a<span class="sc">@</span>geracao <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb6-22"><a href="introdução.html#cb6-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">cromossomo =</span> filho1</span>
+<span id="cb6-23"><a href="introdução.html#cb6-23" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-24"><a href="introdução.html#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">new</span>(</span>
+<span id="cb6-25"><a href="introdução.html#cb6-25" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Solucao&quot;</span>, </span>
+<span id="cb6-26"><a href="introdução.html#cb6-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">pesos =</span> solucao_b<span class="sc">@</span>pesos,</span>
+<span id="cb6-27"><a href="introdução.html#cb6-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">pontos_sobrevivencia =</span> solucao_b<span class="sc">@</span>pontos_sobrevivencia,</span>
+<span id="cb6-28"><a href="introdução.html#cb6-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">limite_peso =</span> solucao_b<span class="sc">@</span>limite_peso,</span>
+<span id="cb6-29"><a href="introdução.html#cb6-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">geracao =</span> solucao_b<span class="sc">@</span>geracao <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb6-30"><a href="introdução.html#cb6-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">cromossomo =</span> filho2</span>
+<span id="cb6-31"><a href="introdução.html#cb6-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-32"><a href="introdução.html#cb6-32" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-33"><a href="introdução.html#cb6-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-34"><a href="introdução.html#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(filhos)</span>
+<span id="cb6-35"><a href="introdução.html#cb6-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-36"><a href="introdução.html#cb6-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="mutação" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Mutação</h2>
+<p><img src="assets/img/mutacao.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p>Em certos novos descendentes formados, alguns de seus genes podem ser submetidos a uma mutação com baixa probabilidade aleatória. Isso implica que alguns dos genes do cromossomo podem ser invertidos.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introdução.html#cb7-1" aria-hidden="true" tabindex="-1"></a>mutacao <span class="ot">&lt;-</span> <span class="cf">function</span>(solucao, taxa_mutacao) {</span>
+<span id="cb7-2"><a href="introdução.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(solucao<span class="sc">@</span>cromossomo)) {</span>
+<span id="cb7-3"><a href="introdução.html#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">&lt;</span> taxa_mutacao) {</span>
+<span id="cb7-4"><a href="introdução.html#cb7-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (solucao<span class="sc">@</span>cromossomo[i] <span class="sc">==</span> <span class="st">&#39;1&#39;</span>) {</span>
+<span id="cb7-5"><a href="introdução.html#cb7-5" aria-hidden="true" tabindex="-1"></a>        solucao<span class="sc">@</span>cromossomo[i] <span class="ot">&lt;-</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb7-6"><a href="introdução.html#cb7-6" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb7-7"><a href="introdução.html#cb7-7" aria-hidden="true" tabindex="-1"></a>        solucao<span class="sc">@</span>cromossomo[i] <span class="ot">&lt;-</span> <span class="st">&#39;1&#39;</span></span>
+<span id="cb7-8"><a href="introdução.html#cb7-8" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb7-9"><a href="introdução.html#cb7-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-10"><a href="introdução.html#cb7-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-11"><a href="introdução.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-12"><a href="introdução.html#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(solucao)</span>
+<span id="cb7-13"><a href="introdução.html#cb7-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>E a cada geração será gerada diversas possíveis soluções para o problema, assim devemos escolher a melhor solução em cada geração e posteriormente a melhor solução de todas.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="introdução.html#cb8-1" aria-hidden="true" tabindex="-1"></a>ordena_populacao <span class="ot">&lt;-</span> <span class="cf">function</span>(populacao) {</span>
+<span id="cb8-2"><a href="introdução.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  populacao_ordenada <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb8-3"><a href="introdução.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  notas_avaliacao <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb8-4"><a href="introdução.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (solucao <span class="cf">in</span> populacao) {</span>
+<span id="cb8-5"><a href="introdução.html#cb8-5" aria-hidden="true" tabindex="-1"></a>    notas_avaliacao <span class="ot">&lt;-</span> <span class="fu">c</span>(notas_avaliacao, solucao<span class="sc">@</span>nota_avaliacao)</span>
+<span id="cb8-6"><a href="introdução.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-7"><a href="introdução.html#cb8-7" aria-hidden="true" tabindex="-1"></a>  lista_posicao <span class="ot">&lt;-</span> <span class="fu">order</span>(notas_avaliacao, <span class="at">decreasing =</span> T)</span>
+<span id="cb8-8"><a href="introdução.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(lista_posicao)) {</span>
+<span id="cb8-9"><a href="introdução.html#cb8-9" aria-hidden="true" tabindex="-1"></a>    populacao_ordenada <span class="ot">&lt;-</span> <span class="fu">c</span>(populacao_ordenada, populacao[[lista_posicao[i]]])</span>
+<span id="cb8-10"><a href="introdução.html#cb8-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-11"><a href="introdução.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-12"><a href="introdução.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(populacao_ordenada)</span>
+<span id="cb8-13"><a href="introdução.html#cb8-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-14"><a href="introdução.html#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="introdução.html#cb8-15" aria-hidden="true" tabindex="-1"></a>melhor_solucao <span class="ot">&lt;-</span> <span class="cf">function</span>(algoritmo_genetico, solucao) {</span>
+<span id="cb8-16"><a href="introdução.html#cb8-16" aria-hidden="true" tabindex="-1"></a>  algoritmo_genetico<span class="sc">@</span>lista_solucoes <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb8-17"><a href="introdução.html#cb8-17" aria-hidden="true" tabindex="-1"></a>    algoritmo_genetico<span class="sc">@</span>lista_solucoes,</span>
+<span id="cb8-18"><a href="introdução.html#cb8-18" aria-hidden="true" tabindex="-1"></a>    solucao<span class="sc">@</span>nota_avaliacao</span>
+<span id="cb8-19"><a href="introdução.html#cb8-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-20"><a href="introdução.html#cb8-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-21"><a href="introdução.html#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (solucao<span class="sc">@</span>nota_avaliacao <span class="sc">&gt;</span> algoritmo_genetico<span class="sc">@</span>melhor_solucao<span class="sc">@</span>nota_avaliacao) {</span>
+<span id="cb8-22"><a href="introdução.html#cb8-22" aria-hidden="true" tabindex="-1"></a>    algoritmo_genetico<span class="sc">@</span>melhor_solucao <span class="ot">&lt;-</span> solucao</span>
+<span id="cb8-23"><a href="introdução.html#cb8-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-24"><a href="introdução.html#cb8-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-25"><a href="introdução.html#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(algoritmo_genetico)</span>
+<span id="cb8-26"><a href="introdução.html#cb8-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-27"><a href="introdução.html#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="introdução.html#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="introdução.html#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar a melhor solução de cada geração</span></span>
+<span id="cb8-30"><a href="introdução.html#cb8-30" aria-hidden="true" tabindex="-1"></a>visualiza_geracao <span class="ot">&lt;-</span> <span class="cf">function</span>(algoritmo_genetico) {</span>
+<span id="cb8-31"><a href="introdução.html#cb8-31" aria-hidden="true" tabindex="-1"></a>  melhor <span class="ot">&lt;-</span> algoritmo_genetico<span class="sc">@</span>populacao[[<span class="dv">1</span>]]</span>
+<span id="cb8-32"><a href="introdução.html#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(</span>
+<span id="cb8-33"><a href="introdução.html#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">- Geração:&quot;</span>, melhor<span class="sc">@</span>geracao, </span>
+<span id="cb8-34"><a href="introdução.html#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Nota sobrevivência:&quot;</span>, melhor<span class="sc">@</span>nota_avaliacao,</span>
+<span id="cb8-35"><a href="introdução.html#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Peso total:&quot;</span>, melhor<span class="sc">@</span>peso_total,</span>
+<span id="cb8-36"><a href="introdução.html#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Cromossomo:&quot;</span>, melhor<span class="sc">@</span>cromossomo</span>
+<span id="cb8-37"><a href="introdução.html#cb8-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-38"><a href="introdução.html#cb8-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-39"><a href="introdução.html#cb8-39" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><em>Função principal do algoritmo genético:</em></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introdução.html#cb9-1" aria-hidden="true" tabindex="-1"></a>resolver <span class="ot">&lt;-</span> <span class="cf">function</span>(algoritmo_genetico, taxa_mutacao, num_geracoes, pesos, pontos_sobrevivencia, limite_peso) {</span>
+<span id="cb9-2"><a href="introdução.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  ag <span class="ot">&lt;-</span> algoritmo_genetico</span>
+<span id="cb9-3"><a href="introdução.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  ag <span class="ot">&lt;-</span> <span class="fu">inicializa_populacao</span>(</span>
+<span id="cb9-4"><a href="introdução.html#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">algoritmo_genetico =</span> ag,</span>
+<span id="cb9-5"><a href="introdução.html#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pesos =</span> pesos,</span>
+<span id="cb9-6"><a href="introdução.html#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">pontos_sobrevivencia =</span> pontos_sobrevivencia,</span>
+<span id="cb9-7"><a href="introdução.html#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">limite =</span> limite_peso</span>
+<span id="cb9-8"><a href="introdução.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-9"><a href="introdução.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-10"><a href="introdução.html#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>ag<span class="sc">@</span>tamanho_populacao) {</span>
+<span id="cb9-11"><a href="introdução.html#cb9-11" aria-hidden="true" tabindex="-1"></a>    ag<span class="sc">@</span>populacao[[i]] <span class="ot">&lt;-</span> <span class="fu">avaliacao</span>(ag<span class="sc">@</span>populacao[[i]])</span>
+<span id="cb9-12"><a href="introdução.html#cb9-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-13"><a href="introdução.html#cb9-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-14"><a href="introdução.html#cb9-14" aria-hidden="true" tabindex="-1"></a>  ag<span class="sc">@</span>populacao <span class="ot">&lt;-</span> <span class="fu">ordena_populacao</span>(ag<span class="sc">@</span>populacao)</span>
+<span id="cb9-15"><a href="introdução.html#cb9-15" aria-hidden="true" tabindex="-1"></a>  ag<span class="sc">@</span>melhor_solucao <span class="ot">&lt;-</span> ag<span class="sc">@</span>populacao[[<span class="dv">1</span>]]</span>
+<span id="cb9-16"><a href="introdução.html#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visualiza_geracao</span>(<span class="at">algoritmo_genetico =</span> ag) </span>
+<span id="cb9-17"><a href="introdução.html#cb9-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-18"><a href="introdução.html#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_geracoes) {</span>
+<span id="cb9-19"><a href="introdução.html#cb9-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-20"><a href="introdução.html#cb9-20" aria-hidden="true" tabindex="-1"></a>    soma <span class="ot">=</span> <span class="fu">soma_avaliacoes</span>(<span class="at">algoritmo_genetico =</span> ag)</span>
+<span id="cb9-21"><a href="introdução.html#cb9-21" aria-hidden="true" tabindex="-1"></a>    nova_populacao <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb9-22"><a href="introdução.html#cb9-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-23"><a href="introdução.html#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(solucoes_geradas <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(ag<span class="sc">@</span>tamanho_populacao <span class="sc">/</span> <span class="dv">2</span>)) {</span>
+<span id="cb9-24"><a href="introdução.html#cb9-24" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-25"><a href="introdução.html#cb9-25" aria-hidden="true" tabindex="-1"></a>      pai1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-26"><a href="introdução.html#cb9-26" aria-hidden="true" tabindex="-1"></a>      pai2 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-27"><a href="introdução.html#cb9-27" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-28"><a href="introdução.html#cb9-28" aria-hidden="true" tabindex="-1"></a>      <span class="cf">while</span> (pai1 <span class="sc">==</span> pai2) {</span>
+<span id="cb9-29"><a href="introdução.html#cb9-29" aria-hidden="true" tabindex="-1"></a>        pai1   <span class="ot">&lt;-</span> <span class="fu">selecao_roleta</span>(</span>
+<span id="cb9-30"><a href="introdução.html#cb9-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">algoritmo_genetico =</span> ag, </span>
+<span id="cb9-31"><a href="introdução.html#cb9-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">soma_avaliacoes =</span> soma</span>
+<span id="cb9-32"><a href="introdução.html#cb9-32" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb9-33"><a href="introdução.html#cb9-33" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-34"><a href="introdução.html#cb9-34" aria-hidden="true" tabindex="-1"></a>        pai2 <span class="ot">&lt;-</span> <span class="fu">selecao_roleta</span>(</span>
+<span id="cb9-35"><a href="introdução.html#cb9-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">algoritmo_genetico =</span> ag, </span>
+<span id="cb9-36"><a href="introdução.html#cb9-36" aria-hidden="true" tabindex="-1"></a>          <span class="at">soma_avaliacoes =</span> soma</span>
+<span id="cb9-37"><a href="introdução.html#cb9-37" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb9-38"><a href="introdução.html#cb9-38" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb9-39"><a href="introdução.html#cb9-39" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-40"><a href="introdução.html#cb9-40" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Combinando os pais e criando dois filhos</span></span>
+<span id="cb9-41"><a href="introdução.html#cb9-41" aria-hidden="true" tabindex="-1"></a>      filhos <span class="ot">=</span> <span class="fu">crossover</span>(</span>
+<span id="cb9-42"><a href="introdução.html#cb9-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">solucao_a =</span> ag<span class="sc">@</span>populacao[[pai1]],</span>
+<span id="cb9-43"><a href="introdução.html#cb9-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">solucao_b =</span> ag<span class="sc">@</span>populacao[[pai2]]</span>
+<span id="cb9-44"><a href="introdução.html#cb9-44" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb9-45"><a href="introdução.html#cb9-45" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-46"><a href="introdução.html#cb9-46" aria-hidden="true" tabindex="-1"></a>      filho1 <span class="ot">&lt;-</span> <span class="fu">mutacao</span>(</span>
+<span id="cb9-47"><a href="introdução.html#cb9-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">solucao =</span> filhos[[<span class="dv">1</span>]], </span>
+<span id="cb9-48"><a href="introdução.html#cb9-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">taxa_mutacao =</span> <span class="fl">0.05</span></span>
+<span id="cb9-49"><a href="introdução.html#cb9-49" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb9-50"><a href="introdução.html#cb9-50" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-51"><a href="introdução.html#cb9-51" aria-hidden="true" tabindex="-1"></a>      filho2 <span class="ot">&lt;-</span> <span class="fu">mutacao</span>(</span>
+<span id="cb9-52"><a href="introdução.html#cb9-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">solucao =</span> filhos[[<span class="dv">2</span>]], </span>
+<span id="cb9-53"><a href="introdução.html#cb9-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">taxa_mutacao =</span> <span class="fl">0.05</span></span>
+<span id="cb9-54"><a href="introdução.html#cb9-54" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb9-55"><a href="introdução.html#cb9-55" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-56"><a href="introdução.html#cb9-56" aria-hidden="true" tabindex="-1"></a>      filhos_gerados <span class="ot">&lt;-</span> <span class="fu">c</span>(filho1, filho2)</span>
+<span id="cb9-57"><a href="introdução.html#cb9-57" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-58"><a href="introdução.html#cb9-58" aria-hidden="true" tabindex="-1"></a>      nova_populacao <span class="ot">&lt;-</span> <span class="fu">c</span>(nova_populacao, filhos_gerados)   </span>
+<span id="cb9-59"><a href="introdução.html#cb9-59" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-60"><a href="introdução.html#cb9-60" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-61"><a href="introdução.html#cb9-61" aria-hidden="true" tabindex="-1"></a>    ag<span class="sc">@</span>populacao <span class="ot">&lt;-</span> nova_populacao</span>
+<span id="cb9-62"><a href="introdução.html#cb9-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Realizando a avaliação da nova população</span></span>
+<span id="cb9-63"><a href="introdução.html#cb9-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>ag<span class="sc">@</span>tamanho_populacao) {</span>
+<span id="cb9-64"><a href="introdução.html#cb9-64" aria-hidden="true" tabindex="-1"></a>      ag<span class="sc">@</span>populacao[[i]] <span class="ot">&lt;-</span> <span class="fu">avaliacao</span>(ag<span class="sc">@</span>populacao[[i]])</span>
+<span id="cb9-65"><a href="introdução.html#cb9-65" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-66"><a href="introdução.html#cb9-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-67"><a href="introdução.html#cb9-67" aria-hidden="true" tabindex="-1"></a>    ag<span class="sc">@</span>populacao <span class="ot">&lt;-</span> <span class="fu">ordena_populacao</span>(ag<span class="sc">@</span>populacao)</span>
+<span id="cb9-68"><a href="introdução.html#cb9-68" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-69"><a href="introdução.html#cb9-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visualiza_geracao</span>(<span class="at">algoritmo_genetico =</span> ag) </span>
+<span id="cb9-70"><a href="introdução.html#cb9-70" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-71"><a href="introdução.html#cb9-71" aria-hidden="true" tabindex="-1"></a>    ag <span class="ot">&lt;-</span> <span class="fu">melhor_solucao</span>(</span>
+<span id="cb9-72"><a href="introdução.html#cb9-72" aria-hidden="true" tabindex="-1"></a>      <span class="at">algoritmo_genetico =</span> ag,</span>
+<span id="cb9-73"><a href="introdução.html#cb9-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">solucao =</span> ag<span class="sc">@</span>populacao[[<span class="dv">1</span>]]</span>
+<span id="cb9-74"><a href="introdução.html#cb9-74" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-75"><a href="introdução.html#cb9-75" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-76"><a href="introdução.html#cb9-76" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-77"><a href="introdução.html#cb9-77" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-78"><a href="introdução.html#cb9-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(</span>
+<span id="cb9-79"><a href="introdução.html#cb9-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">----------------------------------&quot;</span>, </span>
+<span id="cb9-80"><a href="introdução.html#cb9-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">**** Melhor solução ***&quot;</span>, </span>
+<span id="cb9-81"><a href="introdução.html#cb9-81" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Geração:&quot;</span>, ag<span class="sc">@</span>melhor_solucao<span class="sc">@</span>geracao,</span>
+<span id="cb9-82"><a href="introdução.html#cb9-82" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">romossomo:&quot;</span>, ag<span class="sc">@</span>melhor_solucao<span class="sc">@</span>cromossomo,</span>
+<span id="cb9-83"><a href="introdução.html#cb9-83" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Peso total:&quot;</span>, ag<span class="sc">@</span>melhor_solucao<span class="sc">@</span>peso_total,</span>
+<span id="cb9-84"><a href="introdução.html#cb9-84" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Pontos de sobrevivência:&quot;</span>, ag<span class="sc">@</span>melhor_solucao<span class="sc">@</span>nota_avaliacao</span>
+<span id="cb9-85"><a href="introdução.html#cb9-85" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb9-86"><a href="introdução.html#cb9-86" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-87"><a href="introdução.html#cb9-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ag)</span>
+<span id="cb9-88"><a href="introdução.html#cb9-88" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-89"><a href="introdução.html#cb9-89" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><em>Resolvendo o problema da mochila:</em></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="introdução.html#cb10-1" aria-hidden="true" tabindex="-1"></a>itens <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb10-2"><a href="introdução.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Capa de chuva&quot;</span>,</span>
+<span id="cb10-3"><a href="introdução.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Canivete&quot;</span>,</span>
+<span id="cb10-4"><a href="introdução.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Água mineral&quot;</span>,</span>
+<span id="cb10-5"><a href="introdução.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Luvas&quot;</span>,</span>
+<span id="cb10-6"><a href="introdução.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Saco de dormir&quot;</span>,</span>
+<span id="cb10-7"><a href="introdução.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Tenda&quot;</span>,</span>
+<span id="cb10-8"><a href="introdução.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Fogão portátil&quot;</span>,</span>
+<span id="cb10-9"><a href="introdução.html#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Comida enlatada&quot;</span>,</span>
+<span id="cb10-10"><a href="introdução.html#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Laches&quot;</span></span>
+<span id="cb10-11"><a href="introdução.html#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-12"><a href="introdução.html#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="introdução.html#cb10-13" aria-hidden="true" tabindex="-1"></a>pesos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">3</span>)</span>
+<span id="cb10-14"><a href="introdução.html#cb10-14" aria-hidden="true" tabindex="-1"></a>pontos_sobrevivencia <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">18</span>, <span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">8</span>)</span>
+<span id="cb10-15"><a href="introdução.html#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="introdução.html#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------</span></span>
+<span id="cb10-17"><a href="introdução.html#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="introdução.html#cb10-18" aria-hidden="true" tabindex="-1"></a>limite <span class="ot">&lt;-</span> <span class="dv">25</span> <span class="co"># Limite da mochila</span></span>
+<span id="cb10-19"><a href="introdução.html#cb10-19" aria-hidden="true" tabindex="-1"></a>tamanho <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># Tamanho da população</span></span>
+<span id="cb10-20"><a href="introdução.html#cb10-20" aria-hidden="true" tabindex="-1"></a>probabilidade_mutacao <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb10-21"><a href="introdução.html#cb10-21" aria-hidden="true" tabindex="-1"></a>numero_geracoes <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb10-22"><a href="introdução.html#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="introdução.html#cb10-23" aria-hidden="true" tabindex="-1"></a>ag <span class="ot">&lt;-</span> <span class="fu">new</span>(</span>
+<span id="cb10-24"><a href="introdução.html#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;algoritmoGenetico&quot;</span>,</span>
+<span id="cb10-25"><a href="introdução.html#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">tamanho_populacao =</span> tamanho</span>
+<span id="cb10-26"><a href="introdução.html#cb10-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-27"><a href="introdução.html#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="introdução.html#cb10-28" aria-hidden="true" tabindex="-1"></a>ag <span class="ot">&lt;-</span> <span class="fu">resolver</span>(</span>
+<span id="cb10-29"><a href="introdução.html#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">algoritmo_genetico =</span> ag,</span>
+<span id="cb10-30"><a href="introdução.html#cb10-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">taxa_mutacao =</span> probabilidade_mutacao, </span>
+<span id="cb10-31"><a href="introdução.html#cb10-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_geracoes =</span> numero_geracoes, </span>
+<span id="cb10-32"><a href="introdução.html#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">pesos =</span> pesos, </span>
+<span id="cb10-33"><a href="introdução.html#cb10-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">pontos_sobrevivencia =</span> pontos_sobrevivencia, </span>
+<span id="cb10-34"><a href="introdução.html#cb10-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">limite_peso =</span> limite</span>
+<span id="cb10-35"><a href="introdução.html#cb10-35" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+## - Geração: 0 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 1 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 2 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 3 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 4 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 5 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 6 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 7 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 8 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 9 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 10 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 11 
+## Nota sobrevivência: 54 
+## Peso total: 24 
+## Cromossomo: 1 0 0 1 1 1 0 1 0
+## - Geração: 12 
+## Nota sobrevivência: 54 
+## Peso total: 24 
+## Cromossomo: 1 0 0 1 1 1 0 1 0
+## - Geração: 13 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 14 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 15 
+## Nota sobrevivência: 55 
+## Peso total: 25 
+## Cromossomo: 0 1 0 0 1 1 0 1 1
+## - Geração: 16 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 17 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 18 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 19 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 20 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 21 
+## Nota sobrevivência: 52 
+## Peso total: 23 
+## Cromossomo: 0 1 0 1 1 1 0 1 0
+## - Geração: 22 
+## Nota sobrevivência: 58 
+## Peso total: 24 
+## Cromossomo: 0 0 1 1 0 1 0 1 0
+## - Geração: 23 
+## Nota sobrevivência: 58 
+## Peso total: 24 
+## Cromossomo: 0 0 1 1 0 1 0 1 0
+## - Geração: 24 
+## Nota sobrevivência: 58 
+## Peso total: 24 
+## Cromossomo: 0 0 1 1 0 1 0 1 0
+## - Geração: 25 
+## Nota sobrevivência: 58 
+## Peso total: 24 
+## Cromossomo: 0 0 1 1 0 1 0 1 0
+## - Geração: 26 
+## Nota sobrevivência: 58 
+## Peso total: 24 
+## Cromossomo: 0 0 1 1 0 1 0 1 0
+## - Geração: 27 
+## Nota sobrevivência: 58 
+## Peso total: 24 
+## Cromossomo: 0 0 1 1 0 1 0 1 0
+## - Geração: 28 
+## Nota sobrevivência: 56 
+## Peso total: 24 
+## Cromossomo: 0 1 1 0 0 1 0 1 0
+## - Geração: 29 
+## Nota sobrevivência: 54 
+## Peso total: 22 
+## Cromossomo: 0 1 0 1 0 1 0 1 1
+## - Geração: 30 
+## Nota sobrevivência: 55 
+## Peso total: 25 
+## Cromossomo: 0 1 0 0 1 1 0 1 1
+## - Geração: 31 
+## Nota sobrevivência: 56 
+## Peso total: 24 
+## Cromossomo: 0 1 1 0 0 1 0 1 0
+## - Geração: 32 
+## Nota sobrevivência: 54 
+## Peso total: 25 
+## Cromossomo: 1 1 0 0 0 1 1 1 0
+## - Geração: 33 
+## Nota sobrevivência: 54 
+## Peso total: 24 
+## Cromossomo: 1 0 0 1 1 1 0 1 0
+## - Geração: 34 
+## Nota sobrevivência: 54 
+## Peso total: 24 
+## Cromossomo: 1 0 0 1 1 1 0 1 0
+## - Geração: 35 
+## Nota sobrevivência: 54 
+## Peso total: 25 
+## Cromossomo: 1 1 0 0 0 1 1 1 0
+## - Geração: 36 
+## Nota sobrevivência: 57 
+## Peso total: 25 
+## Cromossomo: 0 0 0 1 1 1 0 1 1
+## - Geração: 37 
+## Nota sobrevivência: 51 
+## Peso total: 22 
+## Cromossomo: 1 0 0 0 0 1 0 1 1
+## - Geração: 38 
+## Nota sobrevivência: 54 
+## Peso total: 22 
+## Cromossomo: 0 1 0 1 0 1 0 1 1
+## - Geração: 39 
+## Nota sobrevivência: 51 
+## Peso total: 24 
+## Cromossomo: 1 0 0 0 0 1 1 1 0
+## - Geração: 40 
+## Nota sobrevivência: 54 
+## Peso total: 25 
+## Cromossomo: 1 1 0 0 0 1 1 1 0
+## - Geração: 41 
+## Nota sobrevivência: 51 
+## Peso total: 24 
+## Cromossomo: 1 0 0 0 0 1 1 1 0
+## - Geração: 42 
+## Nota sobrevivência: 52 
+## Peso total: 24 
+## Cromossomo: 1 0 1 0 1 1 0 0 1
+## - Geração: 43 
+## Nota sobrevivência: 54 
+## Peso total: 24 
+## Cromossomo: 0 1 0 1 0 1 1 1 0
+## - Geração: 44 
+## Nota sobrevivência: 56 
+## Peso total: 24 
+## Cromossomo: 0 1 1 0 0 1 0 1 0
+## - Geração: 45 
+## Nota sobrevivência: 55 
+## Peso total: 25 
+## Cromossomo: 1 1 1 0 1 1 0 0 1
+## - Geração: 46 
+## Nota sobrevivência: 55 
+## Peso total: 25 
+## Cromossomo: 1 1 1 0 1 1 0 0 1
+## - Geração: 47 
+## Nota sobrevivência: 55 
+## Peso total: 25 
+## Cromossomo: 1 1 1 0 1 1 0 0 1
+## - Geração: 48 
+## Nota sobrevivência: 56 
+## Peso total: 24 
+## Cromossomo: 0 1 1 0 0 1 0 1 0
+## - Geração: 49 
+## Nota sobrevivência: 56 
+## Peso total: 24 
+## Cromossomo: 0 1 1 0 0 1 0 1 0
+## - Geração: 50 
+## Nota sobrevivência: 56 
+## Peso total: 24 
+## Cromossomo: 0 1 1 0 0 1 0 1 0
+## ---------------------------------- 
+## **** Melhor solução *** 
+## Geração: 22 
+## romossomo: 0 0 1 1 0 1 0 1 0 
+## Peso total: 24 
+## Pontos de sobrevivência: 58</code></pre>
+<p><strong><em>Quais os itens que deveriam ser levados na mochila?</em></strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introdução.html#cb12-1" aria-hidden="true" tabindex="-1"></a>peso_total <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-2"><a href="introdução.html#cb12-2" aria-hidden="true" tabindex="-1"></a>pontos <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-3"><a href="introdução.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(itens)) {</span>
+<span id="cb12-4"><a href="introdução.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (ag<span class="sc">@</span>melhor_solucao<span class="sc">@</span>cromossomo[i] <span class="sc">==</span> <span class="st">&#39;1&#39;</span>) {</span>
+<span id="cb12-5"><a href="introdução.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    peso_total <span class="ot">&lt;-</span> peso_total <span class="sc">+</span> pesos[i]</span>
+<span id="cb12-6"><a href="introdução.html#cb12-6" aria-hidden="true" tabindex="-1"></a>    pontos <span class="ot">&lt;-</span> pontos <span class="sc">+</span> pontos_sobrevivencia[i]</span>
+<span id="cb12-7"><a href="introdução.html#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(</span>
+<span id="cb12-8"><a href="introdução.html#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Item:&quot;</span>, itens[i],</span>
+<span id="cb12-9"><a href="introdução.html#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot; | Peso:&quot;</span>, pesos[i],</span>
+<span id="cb12-10"><a href="introdução.html#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot; | Pontos sobrevivência:&quot;</span>, pontos_sobrevivencia[i]</span>
+<span id="cb12-11"><a href="introdução.html#cb12-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-12"><a href="introdução.html#cb12-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-13"><a href="introdução.html#cb12-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## 
+## Item: Água mineral  | Peso: 6  | Pontos sobrevivência: 15
+## Item: Luvas  | Peso: 1  | Pontos sobrevivência: 5
+## Item: Tenda  | Peso: 9  | Pontos sobrevivência: 18
+## Item: Comida enlatada  | Peso: 8  | Pontos sobrevivência: 20</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="introdução.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(</span>
+<span id="cb14-2"><a href="introdução.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">-------------------------------------------&quot;</span>,</span>
+<span id="cb14-3"><a href="introdução.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Peso total:&quot;</span>, peso_total, <span class="st">&quot;- Pontos&quot;</span>, pontos</span>
+<span id="cb14-4"><a href="introdução.html#cb14-4" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
+<pre><code>## 
+## ------------------------------------------- 
+## Peso total: 24 - Pontos 58</code></pre>
+<p><strong><em>Gráfico - Melhores soluções de cada geração:</em></strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="introdução.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb16-2"><a href="introdução.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>numero_geracoes,</span>
+<span id="cb16-3"><a href="introdução.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> ag<span class="sc">@</span>lista_solucoes,</span>
+<span id="cb16-4"><a href="introdução.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb16-5"><a href="introdução.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Acompanhamento das soluções&quot;</span>,</span>
+<span id="cb16-6"><a href="introdução.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb16-7"><a href="introdução.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Gerações&quot;</span>,</span>
+<span id="cb16-8"><a href="introdução.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Pontos sobrevivência&quot;</span></span>
+<span id="cb16-9"><a href="introdução.html#cb16-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="seminario_bookdown_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="pacote-ga.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
