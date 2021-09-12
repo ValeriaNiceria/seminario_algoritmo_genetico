@@ -26,7 +26,7 @@ htmltools::img(
 ```
 
 
-Um algoritmo genético está entre as heurísticas mais famosas, onde são realizados procedimentos de busca no espaço das soluções viáveis, utilizando regras probabilísticas para combinar soluções a fim de obter melhorias de qualidade. É um algoritmo inspirado na teoria da evolução natural de Charles Darwin. Este algoritmo reflete o processo de seleção natural onde os indivíduos mais aptos são selecionados para reprodução a fim de produzir descendentes na próxima geração.
+O algoritmo genético está entre as heurísticas mais famosas, onde são realizados procedimentos de busca no espaço das soluções viáveis, utilizando regras probabilísticas para combinar soluções a fim de obter melhorias de qualidade. É um algoritmo inspirado na teoria da evolução natural de Charles Darwin. Este algoritmo reflete o processo de seleção natural onde os indivíduos mais aptos são selecionados para reprodução a fim de produzir descendentes na próxima geração.
 
 Cinco fases são consideradas em um algoritmo genético:
 
